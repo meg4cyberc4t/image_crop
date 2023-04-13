@@ -1,3 +1,10 @@
+## 0.5.0
+
+Community Contributions. Thank you!
+
+* Dart 3.0.0 (beta)
+* Flutter 3.9.0
+
 ## 0.4.1
 
 Community Contributions. Thank you!
