@@ -7,19 +7,23 @@ import 'package:image_crop/image_crop.dart';
 import 'package:image_picker/image_picker.dart';
 
 void main() {
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    statusBarColor: Colors.transparent,
-    statusBarBrightness: Brightness.dark,
-    statusBarIconBrightness: Brightness.light,
-    systemNavigationBarIconBrightness: Brightness.light,
-  ));
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarBrightness: Brightness.dark,
+      statusBarIconBrightness: Brightness.light,
+      systemNavigationBarIconBrightness: Brightness.light,
+    ),
+  );
 
-  runApp(new MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
   @override
-  _MyAppState createState() => new _MyAppState();
+  State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
@@ -98,12 +102,13 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> _openImage() async {
+    final preferredSize = context.size!.longestSide.ceil();
     final pickedFile =
-        await ImagePicker().getImage(source: ImageSource.gallery);
+        await ImagePicker().pickImage(source: ImageSource.gallery);
     final file = File(pickedFile!.path);
     final sample = await ImageCrop.sampleImage(
       file: file,
-      preferredSize: context.size!.longestSide.ceil(),
+      preferredSize: preferredSize,
     );
 
     _sample?.delete();

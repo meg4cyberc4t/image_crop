@@ -1,4 +1,8 @@
-part of image_crop;
+import 'dart:io';
+import 'dart:math';
+import 'dart:ui' as ui;
+
+import 'package:flutter/widgets.dart';
 
 const _kCropGridColumnCount = 3;
 const _kCropGridRowCount = 3;
