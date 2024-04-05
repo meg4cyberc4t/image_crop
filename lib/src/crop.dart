@@ -109,7 +109,6 @@ class CropState extends State<Crop> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-
     _activeController = AnimationController(
       vsync: this,
       value: widget.alwaysShowGrid ? 1.0 : 0.0,
@@ -126,7 +125,6 @@ class CropState extends State<Crop> with TickerProviderStateMixin {
     }
     _activeController.dispose();
     _settleController.dispose();
-
     super.dispose();
   }
 
@@ -140,7 +138,6 @@ class CropState extends State<Crop> with TickerProviderStateMixin {
   @override
   void didUpdateWidget(Crop oldWidget) {
     super.didUpdateWidget(oldWidget);
-
     if (widget.image != oldWidget.image) {
       _getImage();
     } else if (widget.aspectRatio != oldWidget.aspectRatio) {
@@ -651,12 +648,7 @@ class _CropPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final rect = Rect.fromLTWH(
-      _kCropHandleSize / 2,
-      _kCropHandleSize / 2,
-      size.width - _kCropHandleSize,
-      size.height - _kCropHandleSize,
-    );
+    final rect = Rect.fromLTWH(0, 0, size.width, size.height);
 
     canvas.save();
     canvas.translate(rect.left, rect.top);
@@ -703,9 +695,10 @@ class _CropPainter extends CustomPainter {
         Rect.fromLTRB(0.0, boundaries.top, boundaries.left, boundaries.bottom),
         paint);
     canvas.drawRect(
-        Rect.fromLTRB(
-            boundaries.right, boundaries.top, rect.width, boundaries.bottom),
-        paint);
+      Rect.fromLTRB(
+          boundaries.right, boundaries.top, rect.width, boundaries.bottom),
+      paint,
+    );
 
     if (boundaries.isEmpty == false) {
       _drawGrid(canvas, boundaries);
